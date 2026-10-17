@@ -1,0 +1,45 @@
+{
+  "name": "@chy-zrzy-onemap/ginfer-datav-map",
+  "version": "0.1.3",
+  "main": "index.js",
+  "datav": {
+    "cn_name": "基础地图组件",
+    "protocol": 2,
+    "type": ["map"],
+    "supportTheme": false,
+    "view": { "width": 1200, "height": 800, "minWidth": 320, "minHeight": 240 },
+    "config": {
+      "service": { "type": "group", "name": "服务配置", "children": {
+        "geoServerUrl": { "type": "text", "name": "GeoServer地址", "default": "http://127.0.0.1:8080/geoserver", "description": "填写浏览器可访问的GeoServer根地址" },
+        "geoServerWorkspace": { "type": "text", "name": "GeoServer工作区", "default": "bj2000" },
+        "vectorBasemapUrl": { "type": "text", "name": "矢量底图服务", "default": "" },
+        "imageryBasemapUrl": { "type": "text", "name": "影像底图服务", "default": "" },
+        "amapKey": { "type": "text", "name": "高德Web服务Key", "default": "", "description": "可选；用于地名地址搜索" }
+      } },
+      "view": { "type": "group", "name": "地图视图", "children": {
+        "projection": { "type": "text", "name": "坐标系", "default": "EPSG:100007", "description": "需与图层服务坐标系一致" },
+        "centerX": { "type": "number", "name": "中心X坐标", "default": 799587 },
+        "centerY": { "type": "number", "name": "中心Y坐标", "default": 602562 },
+        "zoom": { "type": "number", "name": "初始级别", "min": 0, "max": 24, "default": 13 }
+      } },
+      "features": { "type": "group", "name": "功能开关", "children": {
+        "placeSearchEnabled": { "type": "boolean", "name": "显示地名地址搜索", "default": true },
+        "toolbar": { "type": "group", "name": "工具栏控件", "children": {
+          "layer": { "type": "boolean", "name": "图层", "default": true },
+          "property": { "type": "boolean", "name": "属性", "default": true },
+          "split": { "type": "boolean", "name": "分屏", "default": true },
+          "swipe": { "type": "boolean", "name": "卷帘", "default": true },
+          "screenshot": { "type": "boolean", "name": "截图", "default": false },
+          "distance": { "type": "boolean", "name": "测距", "default": false },
+          "area": { "type": "boolean", "name": "测面", "default": false },
+          "draw": { "type": "boolean", "name": "标绘", "default": false },
+          "buffer": { "type": "boolean", "name": "缓冲", "default": true },
+          "clear": { "type": "boolean", "name": "清除", "default": true }
+        } }
+      } }
+    },
+    "apis": {},
+    "api_data": {},
+    "events": {}
+  }
+}

@@ -1,0 +1,64 @@
+services:
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - governance
+
+  api:
+    build:
+      context: ./backend
+    env_file: .env
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./data:/data
+      - ./frontend:/frontend:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 5s
+      timeout: 4s
+      retries: 15
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - governance
+      - minsheng
+
+  worker:
+    build:
+      context: ./backend
+    env_file: .env
+    command: ["celery", "-A", "app.celery_app:celery_app", "worker", "--loglevel=INFO", "--concurrency=2"]
+    volumes:
+      - ./backend:/app
+      - ./data:/data
+    depends_on:
+      redis:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+    networks:
+      - governance
+      - minsheng
+
+volumes:
+  redis-data:
+
+networks:
+  governance:
+    driver: bridge
+  minsheng:
+    name: ${MINSHENG_NETWORK_NAME:-minsheng_default}
+    external: ${MINSHENG_NETWORK_EXTERNAL:-false}
+

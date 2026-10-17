@@ -1,0 +1,35 @@
+{
+  "name": "@chy-bjgh/datav-iframe-component",
+  "version": "0.0.2",
+  "main": "index.js",
+  "dependencies": {},
+  "datav": {
+    "cn_name": "chy-bjgh 系统地址嵌套组件",
+    "protocol": 2,
+    "type": ["regular"],
+    "supportTheme": false,
+    "icon": "",
+    "view": { "width": 1200, "height": 800, "minWidth": 320, "minHeight": 240 },
+    "config": {
+      "url": { "type": "text", "name": "系统地址", "default": "http://127.0.0.1:8081/", "description": "填写 DataV 运行环境可以访问的完整地址" },
+      "title": { "type": "text", "name": "页面标题", "default": "嵌套业务系统" },
+      "showToolbar": { "type": "boolean", "name": "显示操作栏", "default": true },
+      "allowFullscreen": { "type": "boolean", "name": "允许全屏", "default": true },
+      "autoReload": { "type": "boolean", "name": "自动刷新", "default": false },
+      "reloadInterval": { "type": "number", "name": "刷新间隔（秒）", "min": 5, "default": 60 },
+      "sandbox": { "type": "text", "name": "iframe sandbox", "default": "", "description": "留空表示不启用 sandbox；启用后按浏览器策略限制权限" },
+      "allow": { "type": "text", "name": "iframe allow", "default": "fullscreen" }
+    },
+    "apis": {
+      "source": {
+        "handler": "render",
+        "description": "iframe 地址接口",
+        "fields": {
+          "url": { "description": "嵌套系统地址", "type": "string", "optional": true }
+        }
+      }
+    },
+    "api_data": { "source": [{ "url": "" }] },
+    "events": {}
+  }
+}

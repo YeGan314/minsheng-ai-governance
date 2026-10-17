@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>空间落图 · 民生智治</title>
+<link rel="stylesheet" href="/public/datav-map/widget.css?v=20261014a">
+<style>
+:root{--ink:#193244;--muted:#718490;--line:#e2e9ec;--teal:#087e80;--canvas:#f3f6f7;--green:#27836d;--amber:#a56e1e}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--canvas)}button{font:inherit}.page{height:100%;min-height:0;padding:20px 28px 24px;display:flex;flex-direction:column;gap:14px}.heading{display:flex;justify-content:space-between;align-items:center;gap:20px}.eyebrow{font-size:11px;font-weight:750;letter-spacing:1.1px;color:var(--teal)}h1{font-size:25px;letter-spacing:-.3px;margin:2px 0}.heading p{font-size:14px;color:var(--muted);margin:0}.status{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#fff;border:1px solid var(--line);border-radius:9px;color:#476271;font-size:13px;white-space:nowrap}.status i{width:8px;height:8px;border-radius:50%;background:#31a77f;box-shadow:0 0 0 3px #31a77f20}.status.offline i{background:#d16b5c;box-shadow:0 0 0 3px #d16b5c20}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 13px;background:#fff;border:1px solid var(--line);border-radius:10px}.source-title{display:flex;align-items:center;gap:10px;min-width:0}.source-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:9px;background:#eaf5f3;color:var(--teal);font-size:19px}.source-title strong{display:block;font-size:14px}.source-title small{display:block;font-size:12px;color:var(--muted)}.readonly{padding:5px 9px;border-radius:20px;background:#eef5f5;color:#52707b;font-size:12px;white-space:nowrap}.content{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:14px;flex:1;min-height:0}.map-shell{position:relative;min-width:0;min-height:420px;overflow:hidden;border:1px solid #dce6e8;border-radius:11px;background:#e8eef0;box-shadow:0 8px 24px #15394b08}.map-widget-host{position:absolute;inset:0}.map-widget-host .map-widget{min-height:100%!important}.map-fallback{position:absolute;inset:0;display:grid;place-items:center;padding:25px;text-align:center;color:#607985;background:#f7fafb}.map-fallback[hidden]{display:none}.map-fallback strong{display:block;color:var(--ink);font-size:16px;margin-bottom:6px}.side{display:flex;flex-direction:column;gap:12px;min-height:0}.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:15px;box-shadow:0 8px 24px #15394b08}.card h2{font-size:15px;margin:0 0 10px}.layer-name{padding:11px 12px;border:1px solid #dcebe8;border-radius:8px;background:#f4faf8}.layer-name strong{display:block;font-size:14px}.layer-name code{display:block;margin-top:4px;color:#6e848d;font-size:11px;overflow-wrap:anywhere}.kv{display:grid;gap:10px;margin:12px 0 0}.kv div{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:13px}.kv b{color:#355465;font-weight:600;text-align:right}.callout{font-size:13px;line-height:1.7;color:#637984;background:#f5f8f9;border:1px solid #e5edef;border-radius:8px;padding:11px 12px}.callout b{color:#3d5967}.footer-note{font-size:12px;color:#8a9aa2;padding:0 2px}
+@media(max-width:980px){.content{grid-template-columns:minmax(0,1fr) 230px}.page{padding:17px 18px 20px}}@media(max-width:720px){.page{height:auto;min-height:100%;padding:15px 12px;overflow:auto}.heading{align-items:flex-start;flex-direction:column;gap:8px}.status{align-self:flex-start}.toolbar{align-items:flex-start;flex-direction:column}.content{grid-template-columns:1fr;grid-template-rows:minmax(450px,62vh) auto}.map-shell{min-height:450px}.side{display:grid;grid-template-columns:1fr 1fr}.side .callout{grid-column:1/-1}}
+html[data-embed="1"],html[data-embed="1"] body{height:100%;min-height:0;overflow:hidden}
+html[data-embed="1"] .page{height:100dvh;min-height:0;padding:0;gap:0}
+html[data-embed="1"] .heading,html[data-embed="1"] .toolbar,html[data-embed="1"] .side,html[data-embed="1"] .footer-note{display:none!important}
+html[data-embed="1"] .content{display:block;flex:1;min-height:0;width:100%;height:100%;overflow:hidden}
+html[data-embed="1"] .map-shell{width:100%;height:100%;min-height:0;border:0;border-radius:0;box-shadow:none}
+.map-attribution{position:absolute;z-index:5;left:10px;bottom:7px;padding:3px 7px;border-radius:4px;background:#ffffffd9;color:#405762;font:11px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.map-attribution a{color:inherit;text-decoration:underline}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="heading">
+    <div><div class="eyebrow">SPATIAL MAPPING · MAPPED RECORDS</div><h1>空间落图</h1><p>查看已落图的民生民情诉求记录及关联空间图层</p></div>
+    <div class="status" id="connectionStatus"><i></i><span>正在连接地图服务…</span></div>
+  </header>
+  <section class="toolbar" aria-label="地图数据来源">
+    <div class="source-title"><span class="source-icon">⌖</span><div><strong>民生民情信息</strong><small>已落图空间数据 · GeoServer 图层服务</small></div></div>
+    <span class="readonly">地图浏览 · 只读</span>
+  </section>
+  <section class="content">
+    <div class="map-shell" aria-label="已落图诉求信息地图"><div id="mapWidget" class="map-widget-host"></div><div class="map-attribution">地图数据来源：天地图</div><div class="map-fallback" id="mapFallback" hidden><div><strong>地图服务暂不可用</strong><span id="mapError">请检查 GeoServer 配置后刷新页面。</span></div></div></div>
+    <aside class="side">
+      <section class="card"><h2>当前图层</h2><div class="layer-name"><strong>民生民情信息</strong><code>bj2000:民生民情信息_bj2000</code></div><div class="kv"><div><span>数据来源</span><b>GeoServer</b></div><div><span>图层类型</span><b>WMS / WFS</b></div><div><span>当前用途</span><b>空间分布查看</b></div></div></section>
+      <section class="card"><h2>浏览提示</h2><div class="callout">使用地图右侧的<strong>图层</strong>面板切换民生信息、行政区边界、轨道线路和站点。启用<strong>属性</strong>工具后，可点选地图要素查看图层属性。</div></section>
+      <section class="card"><h2>后续扩展</h2><div class="callout">当前模块用于查看已有落图结果。后续可在此接入工单选择、地图点选位置、地点角色确认及人工落图复核。</div></section>
+    </aside>
+  </section>
+  <div class="footer-note">此页面通过系统已保存的 GeoServer 数据源读取地图服务；仅提供地图浏览与要素查询，不会修改原始空间数据。</div>
+</main>
+<script>
+if(new URLSearchParams(location.search).get('embed')==='1')document.documentElement.dataset.embed='1';
+const mapLayers=[
+  {id:'city-boundary',name:'北京市市级行政区划边界',type:'WMS',visible:false,params:{LAYERS:'bj2000:beijing_city_boundary_bj2000',VERSION:'1.1.1'}},
+  {id:'district-boundary',name:'北京市区级行政区划边界',type:'WMS',visible:false,params:{LAYERS:'bj2000:beijing_district_boundary_bj2000',VERSION:'1.1.1'}},
+  {id:'township-boundary',name:'北京市乡镇级行政边界',type:'WMS',visible:false,params:{LAYERS:'bj2000:beijing_township_boundary_bj2000',VERSION:'1.1.1'}},
+  {id:'subway-lines',name:'北京市轨道交通线路',type:'WMS',visible:false,searchFields:['line_name','osm_name'],sortField:'osm_id',params:{LAYERS:'bj2000:北京轨道交通线路_OSM_bj2000',VERSION:'1.1.1'}},
+  {id:'subway-stations',name:'北京市轨道交通站点',type:'WMS',visible:false,searchFields:['站点名称','站点标准名称','线路名称','线路标准名称'],sortField:'站点主键',params:{LAYERS:'bj2000:北京轨道站点字典_bj2000',VERSION:'1.1.1'}},
+  {id:'livelihood-info',name:'民生民情信息',type:'WMS',visible:true,searchFields:['地址'],sortField:'业务主键',params:{LAYERS:'bj2000:民生民情信息_bj2000',VERSION:'1.1.1'}},
+];
+function tiandituTile(type,tk){return `https://t0.tianditu.gov.cn/DataServer?T=${type}&x={x}&y={y}&l={z}&tk=${encodeURIComponent(tk)}`}
+function buildMapData(tk){return {center:[799587,602562],zoom:12,projection:'EPSG:100007',baseLayers:[],basemap:{vector:{id:'vector-basemap',name:'矢量底图',type:'XYZ',url:tiandituTile('vec_w',tk),sourceProjection:'EPSG:3857',visible:true},imagery:{id:'imagery-basemap',name:'影像底图',type:'XYZ',url:tiandituTile('img_w',tk),sourceProjection:'EPSG:3857',visible:true}},basemapAnnotations:{vector:{id:'vector-annotations',name:'矢量注记',type:'XYZ',url:tiandituTile('cva_w',tk),sourceProjection:'EPSG:3857',visible:true},imagery:{id:'imagery-annotations',name:'影像注记',type:'XYZ',url:tiandituTile('cia_w',tk),sourceProjection:'EPSG:3857',visible:true}},layers:mapLayers,placeSearchEnabled:false,analysisEnabled:false,toolbar:{layer:true,property:true,split:true,swipe:true,screenshot:true,distance:false,area:false,draw:false,buffer:false,clear:false}}}
+const serviceStatus=document.querySelector('#connectionStatus');
+function setStatus(ok,message){serviceStatus.classList.toggle('offline',!ok);serviceStatus.querySelector('span').textContent=message}
+function loadWidget(){return new Promise((resolve,reject)=>{if(window.BjghDataVMap){resolve();return}const script=document.createElement('script');script.src='/public/datav-map/widget.js?v=20261016b';script.onload=resolve;script.onerror=()=>reject(new Error('地图组件文件加载失败'));document.head.appendChild(script)})}
+async function startMap(){try{const keyResponse=await fetch('/api/v1/maps/tianditu/client-config',{cache:'no-store'});if(!keyResponse.ok){const detail=await keyResponse.json().catch(()=>({}));throw new Error(detail.detail||'无法读取天地图 TK 配置')}const {tk}=await keyResponse.json();if(!tk)throw new Error('尚未配置天地图 TK');const vectorUrl=tiandituTile('vec_w',tk).replace('{x}','3371').replace('{y}','1552').replace('{z}','12');let vectorProbe;try{vectorProbe=await fetch(vectorUrl)}catch{throw new Error('浏览器无法访问天地图服务，请检查网络代理、跨域策略或 TK 域名白名单')}if(!vectorProbe.ok||!vectorProbe.headers.get('content-type')?.toLowerCase().startsWith('image/')){let providerError='';try{const body=await vectorProbe.json();providerError=body.msg||body.message||(body.code?String(body.code):'')}catch{}throw new Error(providerError?`天地图拒绝了瓦片请求：${providerError}`: `天地图瓦片请求失败（HTTP ${vectorProbe.status}）`)}const response=await fetch('/api/v1/data-sources');if(!response.ok)throw new Error('无法读取系统数据源配置');const sources=await response.json();const geo=sources.find(item=>item.kind==='map'&&item.enabled&&item.is_default)||sources.find(item=>item.kind==='map'&&item.enabled);if(!geo?.configured)throw new Error('请先在数据源管理中配置并保存 GeoServer 连接');const test=await fetch('/api/v1/maps/geoserver/bj2000/wms?service=WMS&request=GetCapabilities');if(!test.ok)throw new Error(`GeoServer 图层服务返回 HTTP ${test.status}`);await loadWidget();window.spatialMapApp=window.BjghDataVMap.mountDataVMap(document.querySelector('#mapWidget'),{...buildMapData(tk),layers:mapLayers.map(layer=>({...layer,url:`${location.origin}/api/v1/maps/geoserver/bj2000/wms`}))});setStatus(true,'天地图与 GeoServer 已连接');document.querySelector('#mapFallback').hidden=true}catch(error){document.querySelector('#mapFallback').hidden=false;document.querySelector('#mapError').textContent=error instanceof Error?error.message:'地图组件启动失败';setStatus(false,'地图服务连接失败')}}
+startMap();
+</script>
+</body>
+</html>
